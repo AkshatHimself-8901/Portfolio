@@ -85,8 +85,8 @@
             pointer-events: none; 
             z-index: 10;
             background: radial-gradient(
-                circle 250px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(255, 80, 0, 0.25), 
+                circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(255, 80, 0, 0.15), 
                 transparent 80%
             );
             transition: background 0.1s ease; 
@@ -98,7 +98,7 @@
             border-radius: 50%;
             filter: blur(120px);
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.3;
         }
         
         .ambient-glow-1 {
@@ -136,6 +136,7 @@
             box-shadow: 0 0 12px var(--glow-accent);
         }
 
+        /* Scroll Reveal Animation Classes */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -146,13 +147,13 @@
             transform: translateY(0);
         }
 
-        /* --- REDESIGNED TERMINAL NAVIGATION --- */
+        /* --- HEADER & NAVIGATION --- */
         header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 25px 8%;
-            background-color: transparent;
+            padding: 20px 8%;
+            background-color: rgba(8, 3, 2, 0.7);
             position: fixed;
             width: 100%;
             top: 0;
@@ -167,34 +168,39 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
         nav {
             display: flex;
-            gap: 35px;
+            gap: 30px;
         }
 
         nav a {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             font-family: var(--font-mono); 
-            transition: all 0.3s;
+            transition: color 0.3s;
             display: flex;
             align-items: center;
-            gap: 6px;
         }
 
         nav a span.bracket {
-            color: var(--accent-solid); 
+            color: var(--accent-solid);
             font-weight: 600;
+            margin-right: 6px;
         }
 
         nav a:hover {
             color: var(--text-bright);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        nav a:hover span.bracket {
-            text-shadow: 0 0 10px var(--glow-accent);
         }
 
         /* --- HERO SECTION --- */
@@ -211,12 +217,12 @@
 
         .hero-text h1 {
             font-family: var(--font-serif);
-            font-size: 5.5rem;
+            font-size: clamp(2.4rem, 6vw, 5.5rem);
             font-weight: 700;
             color: var(--text-bright);
             line-height: 1.05;
             margin-bottom: 30px;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.8), 0 0 20px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.2);
             animation: fadeUp 1s ease-out 0.2s forwards;
             opacity: 0;
             transform: translateY(30px);
@@ -320,9 +326,10 @@
             transform: translateY(-2px);
         }
 
-        /* --- 3D INTERACTIVE CARD WRAPPER --- */
+        /* --- 3D INTERACTIVE DISCORD CARD --- */
+        /* Note: FadeUp animation is now on the container to prevent JS glitching */
         .card-container-3d {
-            perspective: 1000px;
+            perspective: 1200px;
             width: 100%;
             max-width: 420px;
             margin: 0 auto;
@@ -335,40 +342,40 @@
             background: linear-gradient(145deg, rgba(35, 20, 20, 0.9), rgba(15, 8, 8, 0.7));
             border-top: 1px solid rgba(255,255,255,0.15);
             border-left: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px; 
+            border-radius: 16px;
             padding: 35px 30px;
             backdrop-filter: blur(12px);
             width: 100%;
             position: relative;
             transform-style: preserve-3d;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
             transition: transform 0.1s ease, box-shadow 0.1s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0px rgba(255, 94, 0, 0); 
+            will-change: transform;
         }
 
+        /* Interactive Lighting overlay */
         .card-glare {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 12px;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 60%);
+            border-radius: 16px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12), transparent 40%);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
             z-index: 10;
         }
 
-        .card-container-3d:hover .card-glare {
-            opacity: 1;
+        .profile-content-wrapper {
+            transform: translateZ(30px); /* 3D push forward */
         }
 
-        /* Terminal Window Dots */
         .window-controls {
             display: flex;
             gap: 6px;
             margin-bottom: 25px;
-            transform: translateZ(20px); 
         }
         
         .window-dot {
@@ -380,10 +387,6 @@
         .dot-red { background-color: #ff5f56; }
         .dot-yellow { background-color: #ffbd2e; }
         .dot-green { background-color: #27c93f; }
-
-        .profile-content-wrapper {
-            transform: translateZ(30px);
-        }
 
         .profile-header {
             display: flex;
@@ -400,7 +403,7 @@
             object-fit: cover;
             background-color: #1a1a1a;
             box-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
-            transform: translateZ(40px); 
+            transform: translateZ(20px); 
         }
 
         .profile-info h3 {
@@ -550,17 +553,7 @@
             border-radius: 2px;
         }
 
-        /* Responsive contact text intro */
-        .contact-intro {
-            font-size: 1.15rem;
-            color: var(--text-main);
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 50px;
-            text-align: left;
-        }
-
-        /* --- PREMIUM GLASS CARDS (Core Skills) --- */
+        /* --- NORMAL FLAT GLASS CARDS (Core Skills) --- */
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -581,27 +574,11 @@
             overflow: hidden;
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 170, 0, 0.1), transparent);
-            transition: left 0.7s ease;
-            transform: skewX(-20deg);
-        }
-
         .glass-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 94, 0, 0.2);
             border-top-color: rgba(255, 170, 0, 0.3);
-            border-left-color: rgba(255, 94, 0, 0.3);
-        }
-
-        .glass-card:hover::before {
-            left: 150%;
+            border-left-color: rgba(255, 170, 0, 0.3);
         }
 
         .glass-card h3 {
@@ -621,7 +598,7 @@
             z-index: 2;
         }
 
-        /* Portfolio Projects */
+        /* --- NORMAL PORTFOLIO PROJECT CARDS --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -702,11 +679,36 @@
             transform: translateY(-2px);
         }
 
-        /* --- NEW GET IN TOUCH SECTION (Two Columns) --- */
+        /* --- EXACT MATCH CONTACT SECTION --- */
+        .contact-header-wrap {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-header-wrap h2.section-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Center the gradient line under Get In Touch */
+        .contact-header-wrap h2.section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contact-intro {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
         .get-in-touch-wrapper {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 50px;
+            gap: 40px;
+            align-items: stretch;
         }
 
         .contact-left {
@@ -716,9 +718,9 @@
         }
 
         .contact-box {
-            background: linear-gradient(145deg, rgba(30, 15, 15, 0.4), rgba(15, 8, 8, 0.2));
+            background: linear-gradient(145deg, rgba(15, 18, 25, 0.6), rgba(8, 12, 18, 0.4));
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 30px;
             backdrop-filter: blur(10px);
         }
@@ -737,6 +739,7 @@
             margin-bottom: 15px;
             color: var(--text-main);
             text-decoration: none;
+            font-size: 0.95rem;
             transition: color 0.3s;
         }
 
@@ -745,7 +748,7 @@
         }
 
         .contact-method svg {
-            color: var(--accent-solid);
+            color: #00a8ff; /* Match image accent */
         }
 
         .contact-method:hover {
@@ -764,9 +767,9 @@
             align-items: center;
             gap: 10px;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--text-bright);
             text-decoration: none;
             font-size: 0.9rem;
@@ -775,13 +778,10 @@
         }
 
         .connect-btn:hover {
-            background: rgba(255, 94, 0, 0.1);
-            border-color: rgba(255, 94, 0, 0.5);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .contact-note {
-            font-family: var(--font-mono);
             font-size: 0.85rem;
             color: var(--text-main);
             opacity: 0.8;
@@ -793,6 +793,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            height: 100%;
         }
 
         .form-group {
@@ -803,52 +804,52 @@
 
         .form-group label {
             color: var(--text-main);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .form-group input, .form-group textarea {
-            background: rgba(15, 8, 8, 0.5);
+            background: rgba(10, 12, 18, 0.8);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 15px;
             color: var(--text-bright);
             font-family: var(--font-sans);
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
             outline: none;
         }
 
         .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--accent-solid);
-            box-shadow: 0 0 10px rgba(255, 94, 0, 0.2);
-            background: rgba(25, 10, 10, 0.8);
+            border-color: #00a8ff;
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.15);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 150px;
+            flex-grow: 1; 
+            min-height: 140px;
         }
 
         .submit-btn {
-            background: var(--gradient-accent);
+            background: #0088cc; /* Match the specific blue */
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 15px;
             font-size: 1rem;
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: auto; 
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            cursor: pointer;
         }
 
         .submit-btn:hover {
-            box-shadow: 0 0 20px rgba(255, 94, 0, 0.5);
+            background: #00a8ff;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.4);
             transform: translateY(-2px);
         }
 
-        /* Footer */
+        /* --- REDESIGNED FOOTER --- */
         footer {
             display: flex;
             justify-content: space-between;
@@ -861,26 +862,10 @@
             background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
         }
 
-        .footer-left {
-            color: var(--text-main);
-        }
-
-        .footer-right {
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        .footer-link {
-            color: var(--text-bright);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .footer-link:hover {
-            color: #ffaa00;
-            text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
-        }
+        .footer-left { color: var(--text-main); }
+        .footer-right { color: var(--text-main); font-weight: 500; }
+        .footer-link { color: var(--text-bright); text-decoration: none; transition: all 0.3s ease; }
+        .footer-link:hover { color: #ffaa00; text-shadow: 0 0 10px rgba(255, 170, 0, 0.5); }
 
         @keyframes heartPump {
             0% { transform: scale(1); }
@@ -894,7 +879,7 @@
             animation: heartPump 1s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
+        /* --- RESPONSIVE CSS --- */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -904,38 +889,27 @@
             }
             .hero-text p { margin: 0 auto 40px auto; }
             .hero-buttons, .hero-tags { justify-content: center; }
-            .hero-text h1 { font-size: 4.5rem; }
+            .hero-text h1 { font-size: 4rem; }
             .scroll-indicator { display: none; }
             
-            .get-in-touch-wrapper {
-                grid-template-columns: 1fr;
-            }
-            
-            nav { gap: 15px; }
-            nav a { font-size: 0.85rem; }
+            .get-in-touch-wrapper { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            .hero-text h1 { font-size: 3.2rem; }
-            /* Scaling down section titles for mobile */
-            .section-title { font-size: 2.2rem; margin-bottom: 30px; }
-            .contact-intro { font-size: 1rem; margin-bottom: 40px; }
-            
-            header { padding: 15px 5%; flex-direction: column; gap: 10px;}
+            .hero-text h1 { font-size: 3rem; }
+            header { padding: 15px 5%; }
             section { padding: 80px 5%; }
-            nav a { margin-left: 0; }
+            nav a { margin-left: 15px; }
             
-            footer {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
+            footer { flex-direction: column; gap: 15px; text-align: center; }
             
             #cursor-glow, .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto !important; }
             
+            /* Disable 3D tilt on mobile */
             .card-container-3d { transform: none !important; perspective: none; }
-            .profile-card { transform: none !important; }
+            .profile-card { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;}
+            .card-glare { display: none; }
         }
     </style>
 </head>
@@ -955,12 +929,12 @@
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
-    <!-- Terminal Style Header / Navigation -->
+    <!-- Header / Navigation (UNTOUCHED) -->
     <header>
+        <div class="logo">AkshatHimself</div>
         <nav>
             <a href="#about"><span class="bracket">[A]</span> About</a>
-            <a href="#skills"><span class="bracket">[S]</span> Skills</a>
-            <a href="#portfolio"><span class="bracket">[P]</span> Projects</a>
+            <a href="#portfolio"><span class="bracket">[W]</span> Work</a>
             <a href="#contact"><span class="bracket">[C]</span> Contact</a>
         </nav>
     </header>
@@ -982,7 +956,7 @@
             </div>
         </div>
 
-        <!-- 3D Card Container -->
+        <!-- 3D Card Container (Isolated Animation Wrapper) -->
         <div class="card-container-3d" id="card3d">
             <div class="profile-card" id="cardInner">
                 <!-- Glare Overlay -->
@@ -1030,7 +1004,6 @@
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
         <div class="scroll-indicator">
             <span>Scroll to explore</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1039,7 +1012,7 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills Section (FLAT, NO TILT) -->
     <section id="skills">
         <h2 class="section-title reveal">Core Skills</h2>
         <div class="about-grid">
@@ -1058,12 +1031,11 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Portfolio Section (FLAT, NO TILT) -->
     <section id="portfolio">
         <h2 class="section-title reveal">Featured Work</h2>
         <div class="projects-grid">
             
-            <!-- Project 1 -->
             <div class="project-card reveal">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/9UgaeuDhATA" title="Iron Man Edit" allowfullscreen></iframe>
@@ -1076,7 +1048,6 @@
                 </div>
             </div>
 
-            <!-- Project 2 -->
             <div class="project-card reveal">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/B_dljzvWqzo" title="Titanic Visual Edit" allowfullscreen></iframe>
@@ -1089,7 +1060,6 @@
                 </div>
             </div>
 
-            <!-- Project 3 -->
             <div class="project-card reveal">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/bfXIKTYn4oM" title="Michael Jackson Edit" allowfullscreen></iframe>
@@ -1109,16 +1079,15 @@
         </div>
     </section>
 
-    <!-- UPDATED GET IN TOUCH SECTION -->
+    <!-- EXACT MATCH CONTACT SECTION (No tilt, Image Replica) -->
     <section id="contact">
-        <div class="reveal">
-            <!-- Left-aligned heading & text, spacing adjusted to fill gap -->
-            <h2 class="section-title" style="margin-bottom: 15px;">Get In Touch</h2>
-            <p class="contact-intro">I’m always open to new visual projects and impactful collaborations. Feel free to reach out to discuss edits, color grading, or custom visuals.</p>
+        <div class="contact-header-wrap reveal">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-intro">I’m open to software engineering roles and impactful projects. Feel free to reach out for opportunities, collaborations, or discussions.</p>
         </div>
         
         <div class="get-in-touch-wrapper reveal">
-            <!-- Left Side: Contact Info -->
+            <!-- Left Side: Contact Boxes -->
             <div class="contact-left">
                 
                 <div class="contact-box">
@@ -1150,15 +1119,14 @@
                 </div>
 
                 <div class="contact-box">
-                    <p class="contact-note">> I typically respond within 24 hours. For urgent inquiries, Discord is the fastest way to reach me.</p>
+                    <p class="contact-note">> I typically respond within 24-48 hours. For urgent matters, feel free to reach out via Discord.</p>
                 </div>
 
             </div>
 
-            <!-- Right Side: Contact Form -->
+            <!-- Right Side: Form -->
             <div class="contact-form">
-                <!-- Using formsubmit.co for free form forwarding -->
-                <form action="https://formsubmit.co/akshat.manages@gmail.com" method="POST" class="contact-form">
+                <form action="https://formsubmit.co/akshat.manages@gmail.com" method="POST" style="height: 100%; display: flex; flex-direction: column; gap: 20px;">
                     <input type="hidden" name="_subject" value="New Inquiry from Portfolio Website!">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
@@ -1173,9 +1141,9 @@
                         <input type="email" id="email" name="email" placeholder="john@example.com" required>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group" style="flex-grow: 1;">
                         <label for="message">Your Message</label>
-                        <textarea id="message" name="message" placeholder="Hello! I'd like to discuss an edit..." required></textarea>
+                        <textarea id="message" name="message" placeholder="Hello! I'd like to discuss..." required></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">Send Message</button>
@@ -1187,7 +1155,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-left">
-            &copy; <span id="year"></span> AkshatHimself. All rights reserved.
+            &copy; <span id="year"></span> Akshat. All rights reserved.
         </div>
         <div class="footer-right">
             Made With <span class="heart-icon">💖</span> By <a href="https://www.youtube.com/@Akshat.8901" target="_blank" class="footer-link">@AkshatHimself</a>
@@ -1202,17 +1170,15 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
-        // Set current year in footer
+        // Set current year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Scroll Progress Bar Logic
+        // Scroll Progress Bar
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1220,12 +1186,8 @@
             document.getElementById('scroll-progress').style.width = scrolled + '%';
         });
 
-        // Scroll Reveal Intersection Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-        
+        // Scroll Reveal
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1234,11 +1196,9 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Custom Cursor Tracking Logic
+        // Custom Cursor Tracking
         const cursorDot = document.querySelector('[data-cursor-dot]');
         const cursorOutline = document.querySelector('[data-cursor-outline]');
         const cursorGlow = document.getElementById('cursor-glow');
@@ -1247,57 +1207,71 @@
             const posX = e.clientX;
             const posY = e.clientY;
 
-            // Background glow location
             cursorGlow.style.setProperty('--mouse-x', `${posX}px`);
             cursorGlow.style.setProperty('--mouse-y', `${posY}px`);
 
-            // Inner dot
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
 
-            // Outer ring
             cursorOutline.animate({
                 left: `${posX}px`,
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
         });
 
-        // --- 3D CARD TILT EFFECT ---
+        // --- 3D DISCORD CARD TILT & INVERTED SHINE (FIXED GLITCHING) ---
         const container = document.getElementById('card3d');
         const cardInner = document.getElementById('cardInner');
         const glare = document.getElementById('cardGlare');
 
+        // Turn off smooth CSS transition when hovering so it snaps instantly (prevents glitching)
+        container.addEventListener('mouseenter', () => {
+            if (window.innerWidth <= 768) return;
+            cardInner.style.transition = 'none';
+        });
+
         container.addEventListener('mousemove', (e) => {
-            // Check if device is mobile to disable heavy 3D effect
             if (window.innerWidth <= 768) return; 
 
             const rect = container.getBoundingClientRect();
+            // Mouse position relative to center (-1 to 1)
             const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
             const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-            const rotateX = y * -15; 
-            const rotateY = x * 15;
+            // Calculate tilt 
+            const rotateX = y * -10; 
+            const rotateY = x * 10;
 
+            // Apply 3D tilt
             cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            
+            // Box shadow pushes away from cursor
             cardInner.style.boxShadow = `
-                ${-x * 20}px ${y * 20}px 50px rgba(0,0,0,0.8),
-                0 0 30px rgba(255, 94, 0, 0.2)
+                ${-x * 20}px ${-y * 20}px 50px rgba(0,0,0,0.8),
+                0 0 15px rgba(255, 94, 0, 0.1)
             `;
 
-            const percentX = (e.clientX - rect.left) / rect.width * 100;
-            const percentY = (e.clientY - rect.top) / rect.height * 100;
-            glare.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255, 255, 255, 0.15), transparent 60%)`;
+            // INVERTED GLOW: Shine on the opposite side of the cursor
+            if (glare) {
+                const shineX = 100 - ((e.clientX - rect.left) / rect.width * 100);
+                const shineY = 100 - ((e.clientY - rect.top) / rect.height * 100);
+                
+                // Tight 40% radius reflection
+                glare.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 255, 255, 0.12), transparent 40%)`;
+                glare.style.opacity = '1';
+            }
         });
 
-        // Reset card when mouse leaves
+        // Turn transition back on when leaving so it eases flat smoothly
         container.addEventListener('mouseleave', () => {
             if (window.innerWidth <= 768) return;
+            cardInner.style.transition = 'transform 0.4s ease, box-shadow 0.4s ease';
             cardInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             cardInner.style.boxShadow = '0 20px 50px rgba(0,0,0,0.8)';
-            glare.style.opacity = '0';
+            if (glare) glare.style.opacity = '0';
         });
 
-        // --- DISCORD LIVE STATUS FETCH LOGIC ---
+        // --- DISCORD LIVE STATUS ---
         async function fetchDiscordData() {
             const userId = '921618070672379944';
             try {
@@ -1311,14 +1285,14 @@
                     }
 
                     const statusSpan = document.getElementById('discord-status');
-                    const status = data.discord_status; // 'online', 'idle', 'dnd', 'offline'
+                    const status = data.discord_status; 
                     
                     statusSpan.className = `status status-${status}`;
                     const statusText = status.charAt(0).toUpperCase() + status.slice(1);
                     statusSpan.textContent = `Discord · ${statusText}`;
                 }
             } catch (error) {
-                console.error("Make sure you have joined the Lanyard Discord server (discord.gg/lanyard) for this to work!", error);
+                console.error("Lanyard error", error);
                 document.getElementById('discord-status').textContent = 'Discord · Offline';
             }
         }
@@ -1326,7 +1300,7 @@
         fetchDiscordData();
         setInterval(fetchDiscordData, 30000);
 
-        // --- COOL TAB TITLE EFFECT ---
+        // --- TAB TITLE EFFECT ---
         const originalTitle = document.title;
         let titleInterval;
         let titleText = originalTitle + " ✦ ";
@@ -1348,6 +1322,22 @@
         });
 
         startTitleAnimation();
+
+        // --- TERMINAL KEYBOARD SHORTCUTS ---
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName.toLowerCase() === 'input' || e.target.tagName.toLowerCase() === 'textarea') return;
+            
+            const key = e.key.toLowerCase();
+            let targetElement = null;
+
+            if (key === 'a') targetElement = document.querySelector('#about');
+            if (key === 'w') targetElement = document.querySelector('#portfolio');
+            if (key === 'c') targetElement = document.querySelector('#contact');
+
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     </script>
 </body>
 </html>
