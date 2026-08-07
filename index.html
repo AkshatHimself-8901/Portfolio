@@ -33,7 +33,7 @@
             /* Font Definitions */
             --font-sans: 'Inter', sans-serif;
             --font-serif: 'Playfair Display', serif;
-            --font-mono: 'JetBrains Mono', monospace; /* Added for terminal look */
+            --font-mono: 'JetBrains Mono', monospace; 
         }
 
         body {
@@ -149,7 +149,7 @@
         /* --- REDESIGNED TERMINAL NAVIGATION --- */
         header {
             display: flex;
-            justify-content: center; /* Center navigation */
+            justify-content: center;
             align-items: center;
             padding: 25px 8%;
             background-color: transparent;
@@ -177,7 +177,7 @@
             text-decoration: none;
             font-size: 1rem;
             font-weight: 500;
-            font-family: var(--font-mono); /* Monospace font */
+            font-family: var(--font-mono); 
             transition: all 0.3s;
             display: flex;
             align-items: center;
@@ -185,7 +185,7 @@
         }
 
         nav a span.bracket {
-            color: var(--accent-solid); /* Orange brackets */
+            color: var(--accent-solid); 
             font-weight: 600;
         }
 
@@ -335,17 +335,16 @@
             background: linear-gradient(145deg, rgba(35, 20, 20, 0.9), rgba(15, 8, 8, 0.7));
             border-top: 1px solid rgba(255,255,255,0.15);
             border-left: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px; /* Slightly sharper corners like the image */
+            border-radius: 12px; 
             padding: 35px 30px;
             backdrop-filter: blur(12px);
             width: 100%;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.1s ease, box-shadow 0.1s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0px rgba(255, 94, 0, 0); /* Base shadow */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0px rgba(255, 94, 0, 0); 
         }
 
-        /* Interactive Lighting overlay */
         .card-glare {
             position: absolute;
             top: 0;
@@ -360,9 +359,6 @@
             z-index: 10;
         }
 
-        .card-container-3d:hover .profile-card {
-            /* Handled dynamically via JS */
-        }
         .card-container-3d:hover .card-glare {
             opacity: 1;
         }
@@ -372,7 +368,7 @@
             display: flex;
             gap: 6px;
             margin-bottom: 25px;
-            transform: translateZ(20px); /* Pushes it off the card in 3D space */
+            transform: translateZ(20px); 
         }
         
         .window-dot {
@@ -385,7 +381,6 @@
         .dot-yellow { background-color: #ffbd2e; }
         .dot-green { background-color: #27c93f; }
 
-        /* All content inside the card needs to be pushed forward for 3D effect */
         .profile-content-wrapper {
             transform: translateZ(30px);
         }
@@ -405,7 +400,7 @@
             object-fit: cover;
             background-color: #1a1a1a;
             box-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
-            transform: translateZ(40px); /* Pops out more */
+            transform: translateZ(40px); 
         }
 
         .profile-info h3 {
@@ -553,6 +548,16 @@
             height: 2px;
             background: var(--gradient-accent);
             border-radius: 2px;
+        }
+
+        /* Responsive contact text intro */
+        .contact-intro {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            text-align: left;
         }
 
         /* --- PREMIUM GLASS CARDS (Core Skills) --- */
@@ -704,14 +709,6 @@
             gap: 50px;
         }
 
-        .contact-subtitle {
-            font-family: var(--font-mono);
-            color: var(--accent-solid);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
         .contact-left {
             display: flex;
             flex-direction: column;
@@ -851,7 +848,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- REDESIGNED FOOTER --- */
+        /* Footer */
         footer {
             display: flex;
             justify-content: space-between;
@@ -885,7 +882,6 @@
             text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
         }
 
-        /* Heart Pumping Animation */
         @keyframes heartPump {
             0% { transform: scale(1); }
             50% { transform: scale(1.25); }
@@ -898,7 +894,7 @@
             animation: heartPump 1s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        /* Responsive */
+        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -908,7 +904,7 @@
             }
             .hero-text p { margin: 0 auto 40px auto; }
             .hero-buttons, .hero-tags { justify-content: center; }
-            .hero-text h1 { font-size: 4rem; }
+            .hero-text h1 { font-size: 4.5rem; }
             .scroll-indicator { display: none; }
             
             .get-in-touch-wrapper {
@@ -920,19 +916,21 @@
         }
 
         @media (max-width: 768px) {
-            .hero-text h1 { font-size: 3rem; }
+            .hero-text h1 { font-size: 3.2rem; }
+            /* Scaling down section titles for mobile */
+            .section-title { font-size: 2.2rem; margin-bottom: 30px; }
+            .contact-intro { font-size: 1rem; margin-bottom: 40px; }
+            
             header { padding: 15px 5%; flex-direction: column; gap: 10px;}
             section { padding: 80px 5%; }
             nav a { margin-left: 0; }
             
-            /* Stack footer on mobile */
             footer {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
             
-            /* Disable special cursors/glows on mobile devices */
             #cursor-glow, .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto !important; }
             
@@ -1111,12 +1109,12 @@
         </div>
     </section>
 
-    <!-- NEW GET IN TOUCH SECTION -->
+    <!-- UPDATED GET IN TOUCH SECTION -->
     <section id="contact">
-        <div style="text-align: center; margin-bottom: 60px;" class="reveal">
-            <span class="contact-subtitle">04. What's Next?</span>
+        <div class="reveal">
+            <!-- Left-aligned heading & text, spacing adjusted to fill gap -->
             <h2 class="section-title" style="margin-bottom: 15px;">Get In Touch</h2>
-            <p style="max-width: 600px; margin: 0 auto; color: var(--text-main);">I’m always open to new visual projects and impactful collaborations. Feel free to reach out to discuss edits, color grading, or custom visuals.</p>
+            <p class="contact-intro">I’m always open to new visual projects and impactful collaborations. Feel free to reach out to discuss edits, color grading, or custom visuals.</p>
         </div>
         
         <div class="get-in-touch-wrapper reveal">
@@ -1159,9 +1157,8 @@
 
             <!-- Right Side: Contact Form -->
             <div class="contact-form">
-                <!-- Using formsubmit.co for free form forwarding - you just need to put your email below and activate it once -->
+                <!-- Using formsubmit.co for free form forwarding -->
                 <form action="https://formsubmit.co/akshat.manages@gmail.com" method="POST" class="contact-form">
-                    <!-- Hidden settings for FormSubmit -->
                     <input type="hidden" name="_subject" value="New Inquiry from Portfolio Website!">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
@@ -1275,22 +1272,18 @@
             if (window.innerWidth <= 768) return; 
 
             const rect = container.getBoundingClientRect();
-            // Mouse position relative to the center of the card (-1 to 1)
             const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
             const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-            // Calculate tilt (max 15 degrees)
             const rotateX = y * -15; 
             const rotateY = x * 15;
 
-            // Apply 3D transform with dynamic shadow based on tilt
             cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             cardInner.style.boxShadow = `
                 ${-x * 20}px ${y * 20}px 50px rgba(0,0,0,0.8),
                 0 0 30px rgba(255, 94, 0, 0.2)
             `;
 
-            // Dynamic Glare effect position
             const percentX = (e.clientX - rect.left) / rect.width * 100;
             const percentY = (e.clientY - rect.top) / rect.height * 100;
             glare.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255, 255, 255, 0.15), transparent 60%)`;
@@ -1354,7 +1347,6 @@
             }
         });
 
-        // Initialize animation
         startTitleAnimation();
     </script>
 </body>
