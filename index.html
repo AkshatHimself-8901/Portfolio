@@ -215,6 +215,7 @@
             gap: 50px;
         }
 
+        /* Fluid Typography using clamp() for desktop/tablet */
         .hero-text h1 {
             font-family: var(--font-serif);
             font-size: clamp(2.4rem, 6vw, 5.5rem);
@@ -326,10 +327,9 @@
             transform: translateY(-2px);
         }
 
-        /* --- 3D INTERACTIVE DISCORD CARD --- */
-        /* Note: FadeUp animation is now on the container to prevent JS glitching */
+        /* --- 3D INTERACTIVE CARD WRAPPER --- */
         .card-container-3d {
-            perspective: 1200px;
+            perspective: 1200px; 
             width: 100%;
             max-width: 420px;
             margin: 0 auto;
@@ -342,14 +342,13 @@
             background: linear-gradient(145deg, rgba(35, 20, 20, 0.9), rgba(15, 8, 8, 0.7));
             border-top: 1px solid rgba(255,255,255,0.15);
             border-left: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
+            border-radius: 16px; 
             padding: 35px 30px;
             backdrop-filter: blur(12px);
             width: 100%;
             position: relative;
             transform-style: preserve-3d;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0px rgba(255, 94, 0, 0); 
             will-change: transform;
         }
 
@@ -368,14 +367,12 @@
             z-index: 10;
         }
 
-        .profile-content-wrapper {
-            transform: translateZ(30px); /* 3D push forward */
-        }
-
+        /* Terminal Window Dots */
         .window-controls {
             display: flex;
             gap: 6px;
             margin-bottom: 25px;
+            transform: translateZ(30px); 
         }
         
         .window-dot {
@@ -387,6 +384,10 @@
         .dot-red { background-color: #ff5f56; }
         .dot-yellow { background-color: #ffbd2e; }
         .dot-green { background-color: #27c93f; }
+
+        .profile-content-wrapper {
+            transform: translateZ(40px);
+        }
 
         .profile-header {
             display: flex;
@@ -553,7 +554,7 @@
             border-radius: 2px;
         }
 
-        /* --- NORMAL FLAT GLASS CARDS (Core Skills) --- */
+        /* --- SKILLS GRID CARDS --- */
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -598,7 +599,7 @@
             z-index: 2;
         }
 
-        /* --- NORMAL PORTFOLIO PROJECT CARDS --- */
+        /* --- PORTFOLIO PROJECT CARDS --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -627,8 +628,9 @@
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            overflow: hidden;
+            width: 100%;
             background: #000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .video-container iframe {
@@ -690,7 +692,6 @@
             margin-bottom: 20px;
         }
 
-        /* Center the gradient line under Get In Touch */
         .contact-header-wrap h2.section-title::after {
             left: 50%;
             transform: translateX(-50%);
@@ -748,7 +749,7 @@
         }
 
         .contact-method svg {
-            color: #00a8ff; /* Match image accent */
+            color: #00a8ff; 
         }
 
         .contact-method:hover {
@@ -767,7 +768,7 @@
             align-items: center;
             gap: 10px;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: var(--text-bright);
@@ -778,7 +779,9 @@
         }
 
         .connect-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .contact-note {
@@ -789,6 +792,16 @@
         }
 
         /* Right Side Form */
+        .form-box {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(145deg, rgba(15, 18, 25, 0.6), rgba(8, 12, 18, 0.4));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -805,10 +818,11 @@
         .form-group label {
             color: var(--text-main);
             font-size: 0.85rem;
+            letter-spacing: 0.5px;
         }
 
         .form-group input, .form-group textarea {
-            background: rgba(10, 12, 18, 0.8);
+            background: rgba(10, 5, 5, 0.6);
             border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 15px;
@@ -822,6 +836,7 @@
         .form-group input:focus, .form-group textarea:focus {
             border-color: #00a8ff;
             box-shadow: 0 0 10px rgba(0, 168, 255, 0.15);
+            background: rgba(15, 8, 8, 0.8);
         }
 
         .form-group textarea {
@@ -831,7 +846,7 @@
         }
 
         .submit-btn {
-            background: #0088cc; /* Match the specific blue */
+            background: #0088cc; 
             color: #fff;
             border: none;
             border-radius: 6px;
@@ -843,10 +858,32 @@
             cursor: pointer;
         }
 
-        .submit-btn:hover {
+        .submit-btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .submit-btn:hover:not(:disabled) {
             background: #00a8ff;
-            box-shadow: 0 0 15px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.4);
             transform: translateY(-2px);
+        }
+
+        /* Success Message Box */
+        .success-message {
+            display: none; 
+            padding: 25px; 
+            border-radius: 6px; 
+            background: rgba(0, 168, 255, 0.05); 
+            border: 1px solid rgba(0, 168, 255, 0.3); 
+            color: var(--text-bright); 
+            text-align: center; 
+            margin-top: auto; 
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         /* --- REDESIGNED FOOTER --- */
@@ -862,10 +899,26 @@
             background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
         }
 
-        .footer-left { color: var(--text-main); }
-        .footer-right { color: var(--text-main); font-weight: 500; }
-        .footer-link { color: var(--text-bright); text-decoration: none; transition: all 0.3s ease; }
-        .footer-link:hover { color: #ffaa00; text-shadow: 0 0 10px rgba(255, 170, 0, 0.5); }
+        .footer-left {
+            color: var(--text-main);
+        }
+
+        .footer-right {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .footer-link {
+            color: var(--text-bright);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-link:hover {
+            color: #ffaa00;
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+        }
 
         @keyframes heartPump {
             0% { transform: scale(1); }
@@ -896,7 +949,10 @@
         }
 
         @media (max-width: 768px) {
-            .hero-text h1 { font-size: 3rem; }
+            /* Mobile H1 Font Fix - Guarantees it scales cleanly without breaking */
+            .hero-text h1 { font-size: clamp(2rem, 8vw, 3rem) !important; line-height: 1.2 !important; margin-bottom: 20px !important; }
+            .hero-text p { font-size: 1rem !important; margin-bottom: 30px !important; }
+
             header { padding: 15px 5%; }
             section { padding: 80px 5%; }
             nav a { margin-left: 15px; }
@@ -906,10 +962,16 @@
             #cursor-glow, .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto !important; }
             
-            /* Disable 3D tilt on mobile */
+            /* Disable 3D tilt on mobile to prevent overflow/glitching */
             .card-container-3d { transform: none !important; perspective: none; }
-            .profile-card { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;}
+            .profile-card { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important; padding: 25px 20px !important;}
             .card-glare { display: none; }
+        }
+
+        /* Extreme small screen strict overrides */
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 2.2rem !important; line-height: 1.15 !important; }
+            .hero { padding-top: 120px !important; gap: 40px !important;}
         }
     </style>
 </head>
@@ -929,7 +991,7 @@
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
-    <!-- Header / Navigation (UNTOUCHED) -->
+    <!-- Header / Navigation -->
     <header>
         <div class="logo">AkshatHimself</div>
         <nav>
@@ -956,7 +1018,7 @@
             </div>
         </div>
 
-        <!-- 3D Card Container (Isolated Animation Wrapper) -->
+        <!-- 3D Card Container (Isolated Animation Wrapper to stop glitching) -->
         <div class="card-container-3d" id="card3d">
             <div class="profile-card" id="cardInner">
                 <!-- Glare Overlay -->
@@ -1012,7 +1074,7 @@
         </div>
     </section>
 
-    <!-- Skills Section (FLAT, NO TILT) -->
+    <!-- Skills Section (FLAT) -->
     <section id="skills">
         <h2 class="section-title reveal">Core Skills</h2>
         <div class="about-grid">
@@ -1031,7 +1093,7 @@
         </div>
     </section>
 
-    <!-- Portfolio Section (FLAT, NO TILT) -->
+    <!-- Portfolio Section (FLAT) -->
     <section id="portfolio">
         <h2 class="section-title reveal">Featured Work</h2>
         <div class="projects-grid">
@@ -1079,7 +1141,7 @@
         </div>
     </section>
 
-    <!-- EXACT MATCH CONTACT SECTION (No tilt, Image Replica) -->
+    <!-- EXACT MATCH CONTACT SECTION (No tilt, Image Replica, Invisible AJAX Form Submission) -->
     <section id="contact">
         <div class="contact-header-wrap reveal">
             <h2 class="section-title">Get In Touch</h2>
@@ -1124,9 +1186,9 @@
 
             </div>
 
-            <!-- Right Side: Form -->
-            <div class="contact-form">
-                <form action="https://formsubmit.co/akshat.manages@gmail.com" method="POST" style="height: 100%; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Right Side: AJAX Form -->
+            <div class="form-box">
+                <form id="contactForm" class="contact-form">
                     <input type="hidden" name="_subject" value="New Inquiry from Portfolio Website!">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
@@ -1146,8 +1208,14 @@
                         <textarea id="message" name="message" placeholder="Hello! I'd like to discuss..." required></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
                 </form>
+
+                <!-- Formal Success Message Container -->
+                <div id="formSuccessMessage" class="success-message">
+                    <svg width="40" height="40" fill="none" stroke="#00a8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="margin-bottom: 15px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><br>
+                    Thank you for reaching out. <br>Your message has been successfully transmitted, and I will be in touch with you shortly.
+                </div>
             </div>
         </div>
     </section>
@@ -1224,7 +1292,7 @@
         const cardInner = document.getElementById('cardInner');
         const glare = document.getElementById('cardGlare');
 
-        // Turn off smooth CSS transition when hovering so it snaps instantly (prevents glitching)
+        // Turn off smooth CSS transition when hovering so it snaps instantly (prevents fighting JS)
         container.addEventListener('mouseenter', () => {
             if (window.innerWidth <= 768) return;
             cardInner.style.transition = 'none';
@@ -1337,6 +1405,46 @@
             if (targetElement) {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
             }
+        });
+
+        // --- INVISIBLE AJAX FORM SUBMISSION FIX ---
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('formSuccessMessage');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the form from reloading/redirecting the page
+            
+            // Change button text so user knows it's working
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Use fetch to send the form data invisibly to formsubmit.co
+            const formData = new FormData(contactForm);
+            fetch('https://formsubmit.co/ajax/akshat.manages@gmail.com', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    // Hide the form entirely and display the formal success message
+                    contactForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    submitBtn.innerText = 'Error. Try Again.';
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                submitBtn.innerText = 'Error. Check connection.';
+                submitBtn.disabled = false;
+                console.log("Form submission error:", error);
+            });
         });
     </script>
 </body>
