@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshat - Video Editor & Visual Specialist</title>
-    <!-- Importing a beautiful Serif font for the big headings, and keeping Inter for the rest -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="36b79c298dea95515c5fe36e250bca62.jpg?v=2">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         /* CSS Reset & Variable Definitions */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none !important; /* Hides default cursor everywhere */
+            cursor: none !important;
         }
 
         :root {
             --bg-color: #080302; 
-            --card-bg: rgba(30, 15, 15, 0.4);
+            --card-bg: rgba(25, 15, 15, 0.6);
             --card-hover: rgba(45, 20, 20, 0.6);
             --border-color: rgba(255, 255, 255, 0.08);
             --text-main: #a1a1aa;
             --text-bright: #ffffff;
             --gradient-accent: linear-gradient(135deg, #ff2a00, #ff5e00, #ffaa00);
+            --accent-solid: #ff5e00;
             --glow-accent: rgba(255, 94, 0, 0.6);
             
             /* Font Definitions */
             --font-sans: 'Inter', sans-serif;
             --font-serif: 'Playfair Display', serif;
+            --font-mono: 'JetBrains Mono', monospace; /* Added for terminal look */
         }
 
         body {
@@ -70,7 +76,6 @@
             pointer-events: none; 
         }
 
-        /* Cursor Glow Effect */
         #cursor-glow {
             position: fixed;
             top: 0;
@@ -131,7 +136,6 @@
             box-shadow: 0 0 12px var(--glow-accent);
         }
 
-        /* Scroll Reveal Animation Classes */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -142,13 +146,13 @@
             transform: translateY(0);
         }
 
-        /* Header & Navigation */
+        /* --- REDESIGNED TERMINAL NAVIGATION --- */
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Center navigation */
             align-items: center;
-            padding: 20px 8%;
-            background-color: rgba(8, 3, 2, 0.7);
+            padding: 25px 8%;
+            background-color: transparent;
             position: fixed;
             width: 100%;
             top: 0;
@@ -163,26 +167,34 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-bright);
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        nav {
+            display: flex;
+            gap: 35px;
         }
 
         nav a {
             color: var(--text-main);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
-            transition: color 0.3s;
+            font-family: var(--font-mono); /* Monospace font */
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a span.bracket {
+            color: var(--accent-solid); /* Orange brackets */
+            font-weight: 600;
         }
 
         nav a:hover {
             color: var(--text-bright);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        nav a:hover span.bracket {
+            text-shadow: 0 0 10px var(--glow-accent);
         }
 
         /* --- HERO SECTION --- */
@@ -210,7 +222,6 @@
             transform: translateY(30px);
         }
 
-        /* Reverted the "In Motion" span back to its clean look */
         .hero-text h1 span {
             font-family: var(--font-serif);
             font-style: italic;
@@ -309,58 +320,74 @@
             transform: translateY(-2px);
         }
 
-        /* Scroll Down Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            animation: fadeUp 1s ease-out 1s forwards, floatBounce 2s infinite ease-in-out 1s;
-        }
-
-        .scroll-indicator span {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-main);
-        }
-
-        .scroll-indicator svg {
-            width: 24px;
-            height: 24px;
-            color: var(--text-main);
-        }
-
-        @keyframes floatBounce {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 8px); }
-        }
-
-        /* Hero Profile Card with new breathing shadow */
-        .profile-card {
-            background: linear-gradient(145deg, rgba(30, 15, 15, 0.7), rgba(15, 8, 8, 0.4));
-            border-top: 1px solid rgba(255,255,255,0.15);
-            border-left: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 30px;
-            backdrop-filter: blur(12px);
+        /* --- 3D INTERACTIVE CARD WRAPPER --- */
+        .card-container-3d {
+            perspective: 1000px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
+            animation: fadeUp 1s ease-out 0.5s forwards;
             opacity: 0;
             transform: translateY(30px);
-            /* Added breathing glow animation to the card */
-            animation: fadeUp 1s ease-out 0.5s forwards, cardBreathe 4s infinite alternate ease-in-out;
         }
 
-        @keyframes cardBreathe {
-            0% { box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(255, 94, 0, 0.1); }
-            100% { box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 40px rgba(255, 94, 0, 0.35); }
+        .profile-card {
+            background: linear-gradient(145deg, rgba(35, 20, 20, 0.9), rgba(15, 8, 8, 0.7));
+            border-top: 1px solid rgba(255,255,255,0.15);
+            border-left: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; /* Slightly sharper corners like the image */
+            padding: 35px 30px;
+            backdrop-filter: blur(12px);
+            width: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0px rgba(255, 94, 0, 0); /* Base shadow */
+        }
+
+        /* Interactive Lighting overlay */
+        .card-glare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 60%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .card-container-3d:hover .profile-card {
+            /* Handled dynamically via JS */
+        }
+        .card-container-3d:hover .card-glare {
+            opacity: 1;
+        }
+
+        /* Terminal Window Dots */
+        .window-controls {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 25px;
+            transform: translateZ(20px); /* Pushes it off the card in 3D space */
+        }
+        
+        .window-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        /* All content inside the card needs to be pushed forward for 3D effect */
+        .profile-content-wrapper {
+            transform: translateZ(30px);
         }
 
         .profile-header {
@@ -378,6 +405,7 @@
             object-fit: cover;
             background-color: #1a1a1a;
             box-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
+            transform: translateZ(40px); /* Pops out more */
         }
 
         .profile-info h3 {
@@ -385,12 +413,14 @@
             font-size: 1.15rem;
             margin-bottom: 2px;
             font-weight: 600;
+            font-family: var(--font-mono);
         }
 
         .profile-info p {
             color: var(--text-main);
             font-size: 0.85rem;
             margin-bottom: 5px;
+            font-family: var(--font-mono);
         }
 
         /* Live Discord Status Colors */
@@ -401,7 +431,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #747f8d;
-            transition: color 0.3s ease;
+            font-family: var(--font-sans);
         }
 
         .status::before {
@@ -412,8 +442,6 @@
             border-radius: 50%;
             margin-right: 6px;
             background-color: #747f8d;
-            box-shadow: 0 0 5px #747f8d;
-            transition: all 0.3s ease;
         }
 
         .status-online { color: #43b581; }
@@ -429,7 +457,7 @@
             margin-bottom: 25px;
             padding-bottom: 25px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .profile-footer {
@@ -465,6 +493,38 @@
             transform: translateY(-3px);
         }
 
+        /* Scroll Down Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 1s forwards, floatBounce 2s infinite ease-in-out 1s;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            color: var(--text-main);
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 8px); }
+        }
+
         /* Section Formatting */
         section {
             padding: 120px 8%;
@@ -472,7 +532,6 @@
             z-index: 20;
         }
 
-        /* Drop shadow and glow to Section Titles */
         .section-title {
             text-align: left;
             font-size: 2.8rem;
@@ -638,70 +697,158 @@
             transform: translateY(-2px);
         }
 
-        /* --- CONTACT GRID SECTION --- */
-        .contact-grid {
+        /* --- NEW GET IN TOUCH SECTION (Two Columns) --- */
+        .get-in-touch-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
         }
 
-        .contact-card {
-            background: linear-gradient(145deg, rgba(30, 15, 15, 0.4), rgba(15, 8, 8, 0.2));
-            border-top: 1px solid rgba(255,255,255,0.08);
-            border-left: 1px solid rgba(255,255,255,0.03);
-            border-radius: 16px;
-            padding: 35px 25px;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+        .contact-subtitle {
+            font-family: var(--font-mono);
+            color: var(--accent-solid);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .contact-left {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 20px;
         }
 
-        .contact-card:hover {
-            border-color: rgba(255, 94, 0, 0.4);
-            background: rgba(255, 94, 0, 0.05);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,94,0,0.05);
+        .contact-box {
+            background: linear-gradient(145deg, rgba(30, 15, 15, 0.4), rgba(15, 8, 8, 0.2));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
         }
 
-        .contact-icon-wrapper {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: rgba(255, 170, 0, 0.05);
-            border: 1px solid rgba(255, 170, 0, 0.3);
+        .contact-box h3 {
+            color: var(--text-bright);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .contact-method {
             display: flex;
             align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-method:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-method svg {
+            color: var(--accent-solid);
+        }
+
+        .contact-method:hover {
+            color: var(--text-bright);
+        }
+
+        .connect-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .connect-btn {
+            flex: 1;
+            display: flex;
             justify-content: center;
-            margin-bottom: 20px;
-            color: #ffaa00;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-bright);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: all 0.3s;
         }
 
-        .contact-card:hover .contact-icon-wrapper {
-            background: #ff5e00;
-            color: #fff;
-            border-color: #ff5e00;
-            box-shadow: 0 0 15px rgba(255, 94, 0, 0.5);
-            transform: scale(1.1);
+        .connect-btn:hover {
+            background: rgba(255, 94, 0, 0.1);
+            border-color: rgba(255, 94, 0, 0.5);
+            transform: translateY(-2px);
         }
 
-        .contact-label {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .contact-note {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             color: var(--text-main);
-            margin-bottom: 8px;
+            opacity: 0.8;
+            line-height: 1.5;
         }
 
-        .contact-value {
-            font-family: var(--font-serif);
-            font-size: 1.25rem;
+        /* Right Side Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            background: rgba(15, 8, 8, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
             color: var(--text-bright);
-            word-wrap: break-word;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-solid);
+            box-shadow: 0 0 10px rgba(255, 94, 0, 0.2);
+            background: rgba(25, 10, 10, 0.8);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: var(--gradient-accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.5);
+            transform: translateY(-2px);
         }
 
         /* --- REDESIGNED FOOTER --- */
@@ -763,13 +910,20 @@
             .hero-buttons, .hero-tags { justify-content: center; }
             .hero-text h1 { font-size: 4rem; }
             .scroll-indicator { display: none; }
+            
+            .get-in-touch-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            nav { gap: 15px; }
+            nav a { font-size: 0.85rem; }
         }
 
         @media (max-width: 768px) {
             .hero-text h1 { font-size: 3rem; }
-            header { padding: 15px 5%; }
+            header { padding: 15px 5%; flex-direction: column; gap: 10px;}
             section { padding: 80px 5%; }
-            nav a { margin-left: 15px; }
+            nav a { margin-left: 0; }
             
             /* Stack footer on mobile */
             footer {
@@ -781,6 +935,9 @@
             /* Disable special cursors/glows on mobile devices */
             #cursor-glow, .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto !important; }
+            
+            .card-container-3d { transform: none !important; perspective: none; }
+            .profile-card { transform: none !important; }
         }
     </style>
 </head>
@@ -800,18 +957,18 @@
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
-    <!-- Header / Navigation -->
+    <!-- Terminal Style Header / Navigation -->
     <header>
-        <div class="logo">AkshatHimself</div>
         <nav>
-            <a href="#about">About</a>
-            <a href="#portfolio">Work</a>
-            <a href="#contact">Contact</a>
+            <a href="#about"><span class="bracket">[A]</span> About</a>
+            <a href="#skills"><span class="bracket">[S]</span> Skills</a>
+            <a href="#portfolio"><span class="bracket">[P]</span> Projects</a>
+            <a href="#contact"><span class="bracket">[C]</span> Contact</a>
         </nav>
     </header>
 
     <!-- Split Layout Hero Section -->
-    <section class="hero">
+    <section class="hero" id="about">
         <div class="hero-text">
             <h1>Turning Ideas <br><span>Into Motion.</span></h1>
             <p>I focus on advanced visual enhancements, delivering bright, seamlessly smooth edits with precise audio-syncing and professional color grading.</p>
@@ -827,36 +984,50 @@
             </div>
         </div>
 
-        <div class="profile-card">
-            <div class="profile-header">
-                <img id="discord-pfp" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" alt="Akshat Profile" class="profile-avatar">
-                <div class="profile-info">
-                    <h3>Akshat</h3>
-                    <p>@akshat.8901</p>
-                    <span id="discord-status" class="status status-offline">Discord · Loading...</span>
-                </div>
-            </div>
-            
-            <div class="profile-bio">
-                Specializing in high-quality color grading, smooth transitions, complex text effects, and cinematic visual storytelling.
-            </div>
+        <!-- 3D Card Container -->
+        <div class="card-container-3d" id="card3d">
+            <div class="profile-card" id="cardInner">
+                <!-- Glare Overlay -->
+                <div class="card-glare" id="cardGlare"></div>
+                
+                <div class="profile-content-wrapper">
+                    <!-- Mac Terminal Dots -->
+                    <div class="window-controls">
+                        <div class="window-dot dot-red"></div>
+                        <div class="window-dot dot-yellow"></div>
+                        <div class="window-dot dot-green"></div>
+                    </div>
 
-            <div class="profile-footer">
-                <div class="social-mini">
-                    <a href="https://www.youtube.com/@Akshat.8901" target="_blank" aria-label="YouTube">
-                        <!-- Accurate Outline YouTube SVG -->
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <rect x="2" y="5" width="20" height="14" rx="3.5"></rect>
-                            <polygon points="10 9 15 12 10 15 10 9"></polygon>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/akshat.8901/" target="_blank" aria-label="Instagram">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </a>
+                    <div class="profile-header">
+                        <img id="discord-pfp" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" alt="Akshat Profile" class="profile-avatar">
+                        <div class="profile-info">
+                            <h3>Akshat</h3>
+                            <p>@akshat.8901</p>
+                            <span id="discord-status" class="status status-offline">Discord · Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-bio">
+                        Specializing in high-quality color grading, smooth transitions, complex text effects, and cinematic visual storytelling.
+                    </div>
+
+                    <div class="profile-footer">
+                        <div class="social-mini">
+                            <a href="https://www.youtube.com/@Akshat.8901" target="_blank" aria-label="YouTube">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <rect x="2" y="5" width="20" height="14" rx="3.5"></rect>
+                                    <polygon points="10 9 15 12 10 15 10 9"></polygon>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/akshat.8901/" target="_blank" aria-label="Instagram">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -870,8 +1041,8 @@
         </div>
     </section>
 
-    <!-- About / Skills Section -->
-    <section id="about">
+    <!-- Skills Section -->
+    <section id="skills">
         <h2 class="section-title reveal">Core Skills</h2>
         <div class="about-grid">
             <div class="glass-card reveal">
@@ -935,60 +1106,88 @@
 
         </div>
 
-        <!-- Browse More Button -->
         <div class="reveal" style="text-align: center; margin-top: 60px;">
             <a href="https://www.youtube.com/@Akshat.8901" target="_blank" class="cta-btn">Browse More on YouTube</a>
         </div>
     </section>
 
-    <!-- Contact Links Grid Section -->
+    <!-- NEW GET IN TOUCH SECTION -->
     <section id="contact">
-        <h2 class="section-title reveal">Reach Out</h2>
+        <div style="text-align: center; margin-bottom: 60px;" class="reveal">
+            <span class="contact-subtitle">04. What's Next?</span>
+            <h2 class="section-title" style="margin-bottom: 15px;">Get In Touch</h2>
+            <p style="max-width: 600px; margin: 0 auto; color: var(--text-main);">I’m always open to new visual projects and impactful collaborations. Feel free to reach out to discuss edits, color grading, or custom visuals.</p>
+        </div>
         
-        <div class="contact-grid">
-            <!-- Email -->
-            <a href="mailto:akshat.manages@gmail.com" class="contact-card reveal">
-                <div class="contact-icon-wrapper">
-                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <div class="get-in-touch-wrapper reveal">
+            <!-- Left Side: Contact Info -->
+            <div class="contact-left">
+                
+                <div class="contact-box">
+                    <h3>Contact me Directly</h3>
+                    
+                    <a href="mailto:akshat.manages@gmail.com" class="contact-method">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        akshat.manages@gmail.com
+                    </a>
+                    
+                    <a href="https://discord.com/users/921618070672379944" target="_blank" class="contact-method">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        Discord: AkshatHimself
+                    </a>
                 </div>
-                <div class="contact-label">Email</div>
-                <div class="contact-value" style="font-size: 1.1rem;">akshat.manages<br>@gmail.com</div>
-            </a>
 
-            <!-- Discord Reverted to Message/SMS Style -->
-            <a href="https://discord.com/users/921618070672379944" target="_blank" class="contact-card reveal">
-                <div class="contact-icon-wrapper">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <div class="contact-box">
+                    <h3>Connect Online</h3>
+                    <div class="connect-buttons">
+                        <a href="https://www.youtube.com/@Akshat.8901" target="_blank" class="connect-btn">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3.5"></rect><polygon points="10 9 15 12 10 15 10 9"></polygon></svg>
+                            YouTube
+                        </a>
+                        <a href="https://www.instagram.com/akshat.8901/" target="_blank" class="connect-btn">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            Instagram
+                        </a>
+                    </div>
                 </div>
-                <div class="contact-label">Discord</div>
-                <div class="contact-value">AkshatHimself</div>
-            </a>
 
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/@Akshat.8901" target="_blank" class="contact-card reveal">
-                <div class="contact-icon-wrapper">
-                    <!-- Accurate Outline YouTube SVG -->
-                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <rect x="2" y="5" width="20" height="14" rx="3.5"></rect>
-                        <polygon points="10 9 15 12 10 15 10 9"></polygon>
-                    </svg>
+                <div class="contact-box">
+                    <p class="contact-note">> I typically respond within 24 hours. For urgent inquiries, Discord is the fastest way to reach me.</p>
                 </div>
-                <div class="contact-label">YouTube</div>
-                <div class="contact-value">@Akshat.8901</div>
-            </a>
 
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/akshat.8901/" target="_blank" class="contact-card reveal">
-                <div class="contact-icon-wrapper">
-                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </div>
-                <div class="contact-label">Instagram</div>
-                <div class="contact-value">@akshat.8901</div>
-            </a>
+            </div>
+
+            <!-- Right Side: Contact Form -->
+            <div class="contact-form">
+                <!-- Using formsubmit.co for free form forwarding - you just need to put your email below and activate it once -->
+                <form action="https://formsubmit.co/akshat.manages@gmail.com" method="POST" class="contact-form">
+                    <!-- Hidden settings for FormSubmit -->
+                    <input type="hidden" name="_subject" value="New Inquiry from Portfolio Website!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Hello! I'd like to discuss an edit..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <!-- Redesigned Footer -->
+    <!-- Footer -->
     <footer>
         <div class="footer-left">
             &copy; <span id="year"></span> AkshatHimself. All rights reserved.
@@ -1042,7 +1241,7 @@
             observer.observe(el);
         });
 
-        // Custom Cursor & Glow Tracking Logic
+        // Custom Cursor Tracking Logic
         const cursorDot = document.querySelector('[data-cursor-dot]');
         const cursorOutline = document.querySelector('[data-cursor-outline]');
         const cursorGlow = document.getElementById('cursor-glow');
@@ -1051,19 +1250,58 @@
             const posX = e.clientX;
             const posY = e.clientY;
 
-            // Update background glow location
+            // Background glow location
             cursorGlow.style.setProperty('--mouse-x', `${posX}px`);
             cursorGlow.style.setProperty('--mouse-y', `${posY}px`);
 
-            // Inner dot perfectly follows mouse
+            // Inner dot
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
 
-            // Outer ring trails with a smooth delay using Element.animate()
+            // Outer ring
             cursorOutline.animate({
                 left: `${posX}px`,
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
+        });
+
+        // --- 3D CARD TILT EFFECT ---
+        const container = document.getElementById('card3d');
+        const cardInner = document.getElementById('cardInner');
+        const glare = document.getElementById('cardGlare');
+
+        container.addEventListener('mousemove', (e) => {
+            // Check if device is mobile to disable heavy 3D effect
+            if (window.innerWidth <= 768) return; 
+
+            const rect = container.getBoundingClientRect();
+            // Mouse position relative to the center of the card (-1 to 1)
+            const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+            const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+            // Calculate tilt (max 15 degrees)
+            const rotateX = y * -15; 
+            const rotateY = x * 15;
+
+            // Apply 3D transform with dynamic shadow based on tilt
+            cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            cardInner.style.boxShadow = `
+                ${-x * 20}px ${y * 20}px 50px rgba(0,0,0,0.8),
+                0 0 30px rgba(255, 94, 0, 0.2)
+            `;
+
+            // Dynamic Glare effect position
+            const percentX = (e.clientX - rect.left) / rect.width * 100;
+            const percentY = (e.clientY - rect.top) / rect.height * 100;
+            glare.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255, 255, 255, 0.15), transparent 60%)`;
+        });
+
+        // Reset card when mouse leaves
+        container.addEventListener('mouseleave', () => {
+            if (window.innerWidth <= 768) return;
+            cardInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            cardInner.style.boxShadow = '0 20px 50px rgba(0,0,0,0.8)';
+            glare.style.opacity = '0';
         });
 
         // --- DISCORD LIVE STATUS FETCH LOGIC ---
